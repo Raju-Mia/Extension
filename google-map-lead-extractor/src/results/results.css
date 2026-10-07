@@ -1,0 +1,223 @@
+:root {
+  --bg: #f6f8f9;
+  --surface: #ffffff;
+  --border: #e2e8ea;
+  --text: #141a1c;
+  --text-muted: #647480;
+  --primary: #0e7490;
+  --primary-hover: #0c5f77;
+  --danger: #d92d20;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    "Noto Sans Bengali", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.bar__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar__title h1 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: -0.2px;
+}
+
+.pill {
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search {
+  min-width: 260px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.search:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--primary-hover);
+}
+
+.btn--danger {
+  background: #fff;
+  color: var(--danger);
+  border-color: #f6c6c3;
+}
+
+.btn--danger:hover {
+  background: #fef3f2;
+}
+
+.table-wrap {
+  padding: 16px 20px 48px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.table thead th {
+  position: sticky;
+  top: 62px;
+  background: #f0f5f6;
+  text-align: left;
+  font-weight: 700;
+  color: #33474d;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.table thead th.num {
+  text-align: right;
+}
+
+.table thead th.no-sort {
+  cursor: default;
+}
+
+.table thead th.sorted::after {
+  content: " ↕";
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.table thead th.sorted.asc::after {
+  content: " ▲";
+}
+
+.table thead th.sorted.desc::after {
+  content: " ▼";
+}
+
+.table tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  max-width: 320px;
+}
+
+.table tbody td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table tbody tr:hover {
+  background: #fafcfc;
+}
+
+.table a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.del {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 9px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.del:hover {
+  background: #fef3f2;
+  border-color: #f6c6c3;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+  font-size: 14px;
+}
+
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,75 @@
+import { build, context } from "esbuild";
+import { cpSync, mkdirSync, rmSync, existsSync } from "fs";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const root = resolve(__dirname);
+const src = resolve(root, "src");
+const dist = resolve(root, "dist");
+const watch = process.argv.includes("--watch");
+
+const shared = {
+  bundle: true,
+  target: "chrome120",
+  format: "iife",
+  platform: "browser",
+  sourcemap: false,
+  logLevel: "info",
+};
+
+// Entry points bundled per output file name (must match manifest references).
+const entries = [
+  { in: resolve(src, "background/service-worker.ts"), out: resolve(dist, "service-worker.js") },
+  { in: resolve(src, "content/content.ts"), out: resolve(dist, "content.js") },
+  { in: resolve(src, "popup/popup.ts"), out: resolve(dist, "popup.js") },
+  { in: resolve(src, "options/options.ts"), out: resolve(dist, "options.js") },
+  { in: resolve(src, "results/results.ts"), out: resolve(dist, "results.js") },
+];
+
+function clean() {
+  rmSync(dist, { recursive: true, force: true });
+  mkdirSync(dist, { recursive: true });
+}
+
+function copyStatic() {
+  // manifest + html + css assets (referenced relatively by the manifest)
+  cpSync(resolve(src, "manifest.json"), resolve(dist, "manifest.json"));
+  for (const page of ["popup", "options", "results"]) {
+    cpSync(resolve(src, `${page}/${page}.html`), resolve(dist, `${page}.html`));
+    cpSync(resolve(src, `${page}/${page}.css`), resolve(dist, `${page}.css`));
+  }
+
+  // icons: copy only the manifest-referenced sizes (exclude source art)
+  if (existsSync(resolve(root, "icons"))) {
+    mkdirSync(resolve(dist, "icons"), { recursive: true });
+    for (const size of [16, 32, 48, 128]) {
+      const file = `icon${size}.png`;
+      const from = resolve(root, "icons", file);
+      if (existsSync(from)) cpSync(from, resolve(dist, "icons", file));
+    }
+  }
+}
+
+async function buildAll() {
+  clean();
+  if (watch) {
+    copyStatic();
+    for (const entry of entries) {
+      const ctx = await context({ ...shared, entryPoints: [entry.in], outfile: entry.out });
+      await ctx.watch();
+    }
+    console.log("Watching TypeScript sources... (edit manifest/html/css then re-run npm run build)");
+  } else {
+    for (const entry of entries) {
+      await build({ ...shared, entryPoints: [entry.in], outfile: entry.out });
+    }
+    copyStatic();
+    console.log("Build complete → dist/");
+  }
+}
+
+buildAll().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

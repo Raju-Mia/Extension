@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results — Lead Extractor for Google Maps</title>
+    <link rel="stylesheet" href="results.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar__title">
+        <h1>Collected businesses</h1>
+        <span id="count" class="pill">0</span>
+      </div>
+      <div class="bar__actions">
+        <input id="search" class="search" type="search" placeholder="Filter by name, category, phone, address…" />
+        <button id="exportCsv" class="btn">Export CSV</button>
+        <button id="clearAll" class="btn btn--danger">Clear all</button>
+      </div>
+    </header>
+
+    <main class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr id="head">
+            <th data-key="businessName">Name</th>
+            <th data-key="category">Category</th>
+            <th data-key="phone">Phone</th>
+            <th data-key="email">Email</th>
+            <th data-key="website">Website</th>
+            <th data-key="facebook">Facebook</th>
+            <th data-key="rating" class="num">Rating</th>
+            <th data-key="reviewCount" class="num">Reviews</th>
+            <th data-key="address">Address</th>
+            <th data-key="businessStatus">Status</th>
+            <th class="no-sort"></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="empty" class="empty" hidden>No records yet. Run an extraction, then come back here.</p>
+    </main>
+
+    <script src="results.js"></script>
+  </body>
+</html>

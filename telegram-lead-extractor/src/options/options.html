@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Extractor for Telegram Web — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page__header">
+        <h1>Settings</h1>
+        <p class="page__sub">
+          Member information is processed locally in your browser and never uploaded.
+        </p>
+      </header>
+
+      <form id="settingsForm" class="panel">
+        <div class="field">
+          <label for="scrollDelay">Scroll delay (ms)</label>
+          <input type="number" id="scrollDelay" name="scrollDelay" min="100" max="3000" step="50" />
+          <p class="hint">Pause between scroll steps. Higher is gentler on large groups.</p>
+        </div>
+
+        <div class="field">
+          <label for="maxScanTimeSec">Maximum extraction time (seconds)</label>
+          <input type="number" id="maxScanTimeSec" name="maxScanTimeSec" min="30" max="3600" step="30" />
+          <p class="hint">
+            Extraction stops automatically after this limit. Use a higher value (e.g. 1800–3600)
+            for very large groups or channels.
+          </p>
+        </div>
+
+        <div class="field field--row">
+          <label for="autoOpenMemberList">Automatically open the member list</label>
+          <input type="checkbox" id="autoOpenMemberList" name="autoOpenMemberList" />
+        </div>
+
+        <div class="field field--row">
+          <label for="includeSelf">Include myself ("You") in the export</label>
+          <input type="checkbox" id="includeSelf" name="includeSelf" />
+        </div>
+        <p class="hint hint--tight">Turn off to leave your own account out of the exported list.</p>
+
+        <fieldset class="field">
+          <legend>Preferred export format</legend>
+          <div class="radios">
+            <label><input type="radio" name="preferredFormat" value="csv" /> CSV</label>
+            <label><input type="radio" name="preferredFormat" value="excel" /> Excel</label>
+            <label><input type="radio" name="preferredFormat" value="json" /> JSON</label>
+          </div>
+        </fieldset>
+
+        <div class="field field--row">
+          <label for="saveHistory">Save extraction history</label>
+          <input type="checkbox" id="saveHistory" name="saveHistory" />
+        </div>
+        <p class="hint hint--tight">
+          When off, members exist only for the current extraction and are never stored.
+        </p>
+
+        <div class="actions">
+          <span id="saved" class="saved" hidden>Saved ✓</span>
+          <button type="submit" class="btn">Save</button>
+        </div>
+      </form>
+    </main>
+
+    <script src="options.js"></script>
+  </body>
+</html>

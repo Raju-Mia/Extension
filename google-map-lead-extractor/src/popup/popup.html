@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Extractor for Google Maps</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1 class="app__title">Lead Extractor for Google Maps</h1>
+        <p class="app__subtitle">Collect the businesses already visible in a Maps search into a CSV.</p>
+      </header>
+
+      <section class="status" aria-live="polite">
+        <span id="statusDot" class="status__dot status__dot--unknown"></span>
+        <span id="statusText" class="status__text">Ready</span>
+      </section>
+
+      <section class="field">
+        <label class="field__label" for="searchInput">Search</label>
+        <input id="searchInput" class="text" type="text" placeholder="e.g. dhaka mirpur hospital, or paste a Maps URL" />
+        <button id="detectBtn" class="link-btn" type="button">Use current Maps tab</button>
+      </section>
+
+      <section class="quick" aria-label="Quick settings">
+        <div class="quick__row">
+          <label for="maxBatches">Batches</label>
+          <input id="maxBatches" type="number" min="1" max="50" />
+          <label for="maxBusinesses">Max</label>
+          <input id="maxBusinesses" type="number" min="1" max="500" />
+        </div>
+        <div class="quick__row quick__row--checks">
+          <label><input id="extractDetails" type="checkbox" /> Details</label>
+          <label><input id="extractWebsite" type="checkbox" /> Website</label>
+          <label><input id="removeDuplicates" type="checkbox" /> Dedupe</label>
+        </div>
+      </section>
+
+      <section id="stats" class="stats" hidden>
+        <div class="stats__grid">
+          <div><span id="statFound" class="stats__num">0</span><span class="stats__cap">Found</span></div>
+          <div><span id="statProcessed" class="stats__num">0</span><span class="stats__cap">Processed</span></div>
+          <div><span id="statNew" class="stats__num">0</span><span class="stats__cap">New</span></div>
+          <div><span id="statDupes" class="stats__num">0</span><span class="stats__cap">Dupes</span></div>
+        </div>
+        <div id="current" class="stats__current">Current: —</div>
+        <div class="bar"><span id="barFill" class="bar__fill"></span></div>
+        <div id="progressText" class="progress__text">Starting…</div>
+      </section>
+
+      <section id="message" class="message" hidden></section>
+
+      <section class="controls">
+        <button id="startBtn" class="btn btn--primary">Start Extraction</button>
+        <div class="controls__row" id="runRow" hidden>
+          <button id="pauseBtn" class="btn btn--secondary">Pause</button>
+          <button id="resumeBtn" class="btn btn--secondary" hidden>Resume</button>
+          <button id="stopBtn" class="btn btn--ghost">Stop</button>
+        </div>
+
+        <div class="controls__row">
+          <button id="csvBtn" class="btn btn--secondary" disabled>CSV</button>
+          <button id="excelBtn" class="btn btn--secondary" disabled>Excel</button>
+          <button id="jsonBtn" class="btn btn--secondary" disabled>JSON</button>
+        </div>
+        <div class="controls__row">
+          <button id="resultsBtn" class="btn btn--secondary" disabled>View results</button>
+          <button id="clearBtn" class="btn btn--secondary" disabled>Clear</button>
+        </div>
+      </section>
+
+      <footer class="app__footer">
+        <span>Runs locally. Nothing is uploaded.</span>
+        <a id="optionsLink" href="#" class="app__link">Settings</a>
+      </footer>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

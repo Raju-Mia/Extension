@@ -1,0 +1,19 @@
+{
+  "name": "google-map-lead-extractor",
+  "version": "1.0.0",
+  "description": "Export business information (name, phone, website, address, rating) already visible in Google Maps search results to CSV, Excel, or JSON.",
+  "private": true,
+  "scripts": {
+    "icons": "node gen-icons.mjs",
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "package": "node build.mjs && rm -f google-map-lead-extractor.zip && cd dist && zip -r ../google-map-lead-extractor.zip . -x '.*' && cd .. && echo 'Packaged -> google-map-lead-extractor.zip'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0"
+  }
+}

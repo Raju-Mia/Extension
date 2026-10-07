@@ -1,0 +1,17 @@
+{
+  "name": "whatsapp-lead-extractor",
+  "version": "1.0.0",
+  "description": "Export the participant list already visible in WhatsApp Web groups to CSV or JSON.",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "clean": "rm -rf dist",
+    "package": "node build.mjs && rm -f whatsapp-lead-extractor.zip && cd dist && zip -r ../whatsapp-lead-extractor.zip . -x '.*' && cd .. && echo 'Packaged -> whatsapp-lead-extractor.zip'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0"
+  }
+}

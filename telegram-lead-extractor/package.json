@@ -1,0 +1,19 @@
+{
+  "name": "telegram-lead-extractor",
+  "version": "1.0.0",
+  "description": "Export member information (name, @username, ID) visible in Telegram Web groups to CSV, Excel, or JSON.",
+  "private": true,
+  "scripts": {
+    "icons": "node gen-icons.mjs",
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "package": "node build.mjs && rm -f telegram-lead-extractor.zip && cd dist && zip -r ../telegram-lead-extractor.zip . -x '.*' && cd .. && echo 'Packaged -> telegram-lead-extractor.zip'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0"
+  }
+}

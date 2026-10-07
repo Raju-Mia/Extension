@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Extractor for Google Maps — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page__header">
+        <h1>Settings</h1>
+        <p class="page__sub">
+          Business information is collected locally from Google Maps and never uploaded to any server.
+        </p>
+      </header>
+
+      <form id="settingsForm" class="panel">
+        <div class="field">
+          <label for="maxBatches">Maximum result batches</label>
+          <input type="number" id="maxBatches" name="maxBatches" min="1" max="50" />
+          <p class="hint">How many times to scroll the results list looking for new businesses (1–50).</p>
+        </div>
+
+        <div class="field">
+          <label for="maxBusinesses">Maximum businesses</label>
+          <input type="number" id="maxBusinesses" name="maxBusinesses" min="1" max="500" />
+          <p class="hint">Hard cap on unique businesses collected in one run (1–500).</p>
+        </div>
+
+        <div class="field field--row">
+          <label for="extractDetails">Open each business to read full details</label>
+          <input type="checkbox" id="extractDetails" name="extractDetails" />
+        </div>
+        <p class="hint hint--tight">
+          When on, each place is opened to capture phone, address, hours, and more. When off, only the
+          list-level fields are collected (much faster).
+        </p>
+
+        <div class="field field--row">
+          <label for="extractWebsite">Visit each business's public website for email &amp; social links</label>
+          <input type="checkbox" id="extractWebsite" name="extractWebsite" />
+        </div>
+        <p class="hint hint--tight">
+          Optional and slower. Enabling it asks permission to access business websites; only public
+          homepage / contact / about pages are read, and it is skipped for any site you don't allow.
+        </p>
+
+        <div class="field field--row">
+          <label for="removeDuplicates">Remove duplicates</label>
+          <input type="checkbox" id="removeDuplicates" name="removeDuplicates" />
+        </div>
+        <p class="hint hint--tight">Also folds together the same business found under different listings.</p>
+
+        <div class="field">
+          <label for="delayMs">Delay between actions (ms)</label>
+          <input type="number" id="delayMs" name="delayMs" min="300" max="5000" step="100" />
+          <p class="hint">Pause between scroll/navigation steps. Higher values are gentler on Maps.</p>
+        </div>
+
+        <div class="field">
+          <label for="maxScanTimeSec">Maximum run time (seconds)</label>
+          <input type="number" id="maxScanTimeSec" name="maxScanTimeSec" min="60" max="7200" step="30" />
+          <p class="hint">The extraction stops automatically after this limit. Results stay exportable.</p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Preferred export format</legend>
+          <div class="radios">
+            <label><input type="radio" name="preferredFormat" value="csv" /> CSV</label>
+            <label><input type="radio" name="preferredFormat" value="excel" /> Excel</label>
+            <label><input type="radio" name="preferredFormat" value="json" /> JSON</label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <span id="saved" class="saved" hidden>Saved ✓</span>
+          <button type="submit" class="btn">Save</button>
+        </div>
+      </form>
+
+      <section class="panel">
+        <div class="field">
+          <legend class="field__legend">Stored data</legend>
+          <p class="hint">Everything collected is stored only in this browser via <code>chrome.storage.local</code>.</p>
+          <div class="actions actions--left">
+            <button id="clearData" type="button" class="btn btn--danger">Clear all collected records</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="options.js"></script>
+  </body>
+</html>
